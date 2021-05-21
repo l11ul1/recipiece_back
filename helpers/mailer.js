@@ -1,25 +1,25 @@
 const nodemailer = require("nodemailer");
 
-async function main(){
-let testAccount =  await nodemailer.createTestAccount();
 
 // create reusable transporter object using the default SMTP transport
-var smtpConfig = {
-    host: "smtp.ethereal.email",
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
     port: 587,
-    secure: false, // use SSL
     auth: {
-        user: testAccount.user,
-        pass: testAccount.pass
+		type: "OAuth2",
+		user: "recipieceinfo@gmail.com",
+        pass: 'Gustavo2021',
+		clientId: "778989688285-qbo9pj381764ldepdocjhukiaa0b64g5.apps.googleusercontent.com",
+		clientSecret: "KgI4TccDuFT6zjfXR_PmLSyE",
+		refreshToken: "1//04tOoB14hXbBmCgYIARAAGAQSNwF-L9Irtyt641-2-09qP53iMoYOh_C4gXY2BLjc-4BFvrFPD-bx1__JMcK1kLRYm7XB4Zt3AmQ",
     }
-};
-var transporter = nodemailer.createTransport(smtpConfig);
+});
 
-exports.send = function (from, to, subject, html)
+exports.send = async function (from, to, subject, html)
 {
 	// send mail with defined transport object
 	// visit https://nodemailer.com/ for more options
-	return transporter.sendMail({
+	return await transporter.sendMail({
 		from: from, // sender address e.g. no-reply@xyz.com or "Fred Foo 👻" <foo@example.com>
 		to: to, // list of receivers e.g. bar@example.com, baz@example.com
 		subject: subject, // Subject line e.g. 'Hello ✔'
@@ -28,6 +28,3 @@ exports.send = function (from, to, subject, html)
 	});
 };
 
-}
-
-main().catch(console.error);

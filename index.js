@@ -1,7 +1,7 @@
 // Import all necessary variable for database connection
 const express = require("express");
 const app = express();
-//const authRouter = require("./routes/auth")
+const authRouter = require("./routes/auth");
 const AuthController = require("./controllers/AuthController.js")
 const users = require("./routes/users")
 const mongoose = require("mongoose");
@@ -29,9 +29,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.get('/', function(request, response) {
+app.get('/registration', function(request, response) {
 	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/registration.html');
 });
-app.post("/registration", AuthController.register)
+app.get('/login', function(request, response) {
+	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/login.html');
+});
+app.get('/verify', function(request, response) {
+	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/verify.html');
+});
 app.use("/users", users);
+app.use("/auth", authRouter);
 

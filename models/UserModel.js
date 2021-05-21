@@ -5,6 +5,8 @@ const UserSchema = new mongoose.Schema({
     email: String, 
     password_hash: String, 
     registration_date: Date,
+    confirm_otp: Number,
+    isConfirmed: Number,
 })
 
 module.exports = mongoose.model("User", UserSchema);
