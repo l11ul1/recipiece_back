@@ -1,5 +1,6 @@
 let router = require('express').Router();
 const User = require("../models/UserModel");
+const apiResponse = require("../helpers/apiResponse");
 
 router.get("/", (req,res)=> {
     User.find({}).exec().then(
@@ -8,7 +9,7 @@ router.get("/", (req,res)=> {
         }
     ).catch(
         (err) => {
-            console.log(err);
+            apiResponse.ErrorResponse(res, err);
         }
     );
 });
@@ -20,18 +21,17 @@ router.get("/:email", (req, res)=> {
     User.find({email: email}).then(
         (result) => {
             if(result.length === 0){
-                res.status(404).send("No users with this email")
+                apiResponse.notFoundResponse(res, "No users with this email")
             }else{
                 res.send(result);
             }
         }
     ).catch(
         (err) => {
-            console.log(err);
+            apiResponse.ErrorResponse(res, err);
         }
     )
 });
-
 
 router.delete("/delete/:email", (req, res)=> {
     const email = req.params.email;
@@ -40,14 +40,14 @@ router.delete("/delete/:email", (req, res)=> {
     User.deleteOne({email: email}).then(
         (result) => {
             if(result.length === 0){
-                res.status(404).send("Sorry item was not found :(")
+                apiResponse.notFoundResponse(res, "No users with this email")
             }else{
                 res.send("Delete was completed successfully")
             }
         }
     ).catch(
         (err) => {
-            console.log(err);
+            apiResponse.ErrorResponse(res, err);
         }
     )
 });

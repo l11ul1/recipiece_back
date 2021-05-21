@@ -30,13 +30,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/registration', function(request, response) {
-	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/registration.html');
+	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/testPages/registration.html');
 });
 app.get('/login', function(request, response) {
-	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/login.html');
+	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/testPages/login.html');
 });
 app.get('/verify', function(request, response) {
-	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/verify.html');
+	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/testPages/verify.html');
 });
 app.use("/users", users);
 app.use("/auth", authRouter);
