@@ -1,5 +1,3 @@
-const express = require("express"); 
-//const { model } = require("mongoose");
 let router = require('express').Router();
 const AuthController = require("../controllers/AuthController.js")
 

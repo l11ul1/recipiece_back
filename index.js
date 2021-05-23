@@ -2,8 +2,8 @@
 const express = require("express");
 const app = express();
 const authRouter = require("./routes/auth");
-const AuthController = require("./controllers/AuthController.js")
-const users = require("./routes/users")
+const usersRouter = require("./routes/users")
+const productRouter = require("./routes/products")
 const mongoose = require("mongoose");
 var bodyParser = require('body-parser');
 
@@ -38,6 +38,7 @@ app.get('/login', function(request, response) {
 app.get('/verify', function(request, response) {
 	response.sendFile('/Users/alikhmens/GitHub/recipiece_back/testPages/verify.html');
 });
-app.use("/users", users);
+app.use("/users", usersRouter);
 app.use("/auth", authRouter);
+app.use("/products", productRouter);
 

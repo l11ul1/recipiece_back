@@ -5,7 +5,7 @@ const apiResponse = require("../helpers/apiResponse");
 router.get("/", (req,res)=> {
     User.find({}).exec().then(
         (msg) => {
-        res.send(msg);
+            return apiResponse.successResponseWithData(res,"Users Data retreived", msg);
         }
     ).catch(
         (err) => {
@@ -23,7 +23,7 @@ router.get("/:email", (req, res)=> {
             if(result.length === 0){
                 apiResponse.notFoundResponse(res, "No users with this email")
             }else{
-                res.send(result);
+                return apiResponse.successResponseWithData(res,"Found a user successfully", result);
             }
         }
     ).catch(
@@ -42,7 +42,7 @@ router.delete("/delete/:email", (req, res)=> {
             if(result.length === 0){
                 apiResponse.notFoundResponse(res, "No users with this email")
             }else{
-                res.send("Delete was completed successfully")
+                return apiResponse.successResponseWithData(res,"Deleted successfully", result);
             }
         }
     ).catch(
