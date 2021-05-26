@@ -5,7 +5,7 @@ const apiResponse = require("../helpers/apiResponse");
 exports.productAdd = [
 	body("product_name", "Name must not be empty").isLength({ min: 1 }).trim(),
 	body("product_url_to_image", "Image link has to be specified").isLength({ min: 1 }).trim(),
-	body("product_id", "ISBN must not be empty").isLength({ min: 1 }).trim().custom((value,{req}) => {
+	body("product_id", "ID must not be empty").isLength({ min: 1 }).trim().custom((value,{req}) => {
 		return Product.findOne({product_id: req.body.product_id}).then(product => {
 			if (product) {
 				return Promise.reject("Product already exist with this id");
@@ -16,7 +16,7 @@ exports.productAdd = [
 		try {
 			const errors = validationResult(req);
 			var product = new Product(
-				{ product_name: req.body.product_name,
+				{ 	product_name: req.body.product_name,
 					product_aisle: req.body.product_aisle,
                     product_url_to_image: req.body.product_url_to_image,
 					product_id: req.body.product_id,
